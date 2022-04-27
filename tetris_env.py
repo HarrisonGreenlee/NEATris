@@ -42,4 +42,4 @@ class TetrisEnviroment:
         return self.game_state['score']
 
     def compute_fitness_score(self, state_scoring_agent, epochs):
-        return statistics.mean(self.run_game(state_scoring_agent) for _ in range(epochs))
+        return statistics.mean(float(self.run_game(state_scoring_agent)) for _ in range(epochs))
