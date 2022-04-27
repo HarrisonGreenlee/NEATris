@@ -10,7 +10,7 @@ def run_tetris(genomes, config):
         net = neat.nn.FeedForwardNetwork.create(g, config)
 
         def state_evaluator(board_state, available_pentominos):
-            inputs = list(board_state['board']) + available_pentominos + [board_state['score']]
+            inputs = [column_height/20 for column_height in board_state['board']] + [board_state['board'].max()/20] + available_pentominos + [board_state['score']/9999] + [sum(board_state['board'])/200]
             return net.activate(inputs)
 
         g.fitness = game.compute_fitness_score(state_evaluator, 20)
