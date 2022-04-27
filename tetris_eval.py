@@ -24,19 +24,19 @@ def naive_state_scoring_agent3(state, available_pentominos):
 
 # how to use the fitness function to test an agent
 def example_fitness():
-    test_env = TetrisEnviroment(random.random())
+    test_env = TetrisEnviroment(random.randint(0, 99**999))
     # more epochs will be slower, but produce a more accurate score
     # consider increasing epochs if variance is too high
-    fitness_score = test_env.compute_fitness_score(naive_state_scoring_agent, epochs=10)
+    fitness_score = test_env.compute_fitness_score(naive_state_scoring_agent, 10)
     print(f'This agent has a fitness score of {fitness_score}.')
-
 
     # how to visualize the performance of an agent
 
     scores = []
+    test_env = TetrisEnviroment(random.randint(0, 99**999))
     for i in range(100):
-        test_env = TetrisEnviroment(random.random())
         score = test_env.run_game(naive_state_scoring_agent2)
+        test_env.change_seed(random.randint(0, 99**999))
         scores.append(score)
         print(f'EPOCH {i} COMPLETED - SCORED {score}')
 
