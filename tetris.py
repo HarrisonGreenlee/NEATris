@@ -92,7 +92,7 @@ def get_all_possible_game_states(full_game_states, pentomino_1, pentomino_2, pen
 
 
 def is_game_over(game_state):
-    return game_state['board'].max() > 10
+    return game_state['board'].max() > 20
 
 
 if __name__ == '__main__':
