@@ -33,7 +33,7 @@ class TetrisEnviroment:
         self.available_pentominos_in_current_bag[selected_pentomino_index] = 0
         return self.pentominos_bag[selected_pentomino_index]
 
-    def run_game(self, state_scoring_agent, reset_after=True):
+    def run_game(self, state_scoring_agent, reset_after=True, max_game_score=9999):
         current_pentomino = self.get_next_pentomino(self.rng)
         next_pentomino = self.get_next_pentomino(self.rng)
         while not is_game_over(self.game_state):
@@ -43,9 +43,13 @@ class TetrisEnviroment:
             state_scores = [state_scoring_agent(state, self.available_pentominos_in_current_bag) for state in states]
             # reverse the sort because higher scores are better
             ranked_states = sort_together([state_scores, states], reverse=True)[1]
+
             self.game_state = ranked_states[0]['parent']
             current_pentomino = next_pentomino
             next_pentomino = self.get_next_pentomino(self.rng)
+
+            if self.game_state['score'] > max_game_score:
+                break
 
         score = self.game_state['score']
 
