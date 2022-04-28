@@ -37,7 +37,7 @@ class TetrisEnviroment:
         current_pentomino = self.get_next_pentomino(self.rng)
         next_pentomino = self.get_next_pentomino(self.rng)
         while not is_game_over(self.game_state):
-            states = get_all_possible_game_states(self.game_state, current_pentomino, next_pentomino, None)
+            states = get_all_possible_game_states(self.game_state, current_pentomino, next_pentomino, self.game_state['hold'])
             if not states:
                 break
             state_scores = [state_scoring_agent(state, self.available_pentominos_in_current_bag) for state in states]
