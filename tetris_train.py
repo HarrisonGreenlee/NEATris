@@ -24,5 +24,5 @@ if __name__ == '__main__':
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     # save a checkpoint every 50 generations
-    p.add_reporter(neat.Checkpointer(50))
+    p.add_reporter(neat.Checkpointer(100))
     p.run(run_tetris, 1000)
