@@ -33,10 +33,16 @@ class TetrisEnviroment:
         self.available_pentominos_in_current_bag[selected_pentomino_index] = 0
         return self.pentominos_bag[selected_pentomino_index]
 
-    def run_game(self, state_scoring_agent, reset_after=True, max_game_score=9999):
+    def run_game(self, state_scoring_agent, reset_after=True, max_game_score=9999, log=None):
         current_pentomino = self.get_next_pentomino(self.rng)
         next_pentomino = self.get_next_pentomino(self.rng)
         while not is_game_over(self.game_state):
+            # if a log list was passed as an argument
+            if log is not None:
+                # mutate the log to include the most recent game state
+                # this will slowly build up a list of board states
+                log.append(self.game_state)
+
             states = get_all_possible_game_states(self.game_state, current_pentomino, next_pentomino, self.game_state['hold'])
             if not states:
                 break
